@@ -15,3 +15,4 @@ runs:
   steps:
     - name: "Hello World test"
       run: echo "Hello World"
+      shell: bash
