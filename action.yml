@@ -25,7 +25,7 @@ runs:
       run: echo "Hello World"
       shell: bash
     - name: Check if the example needs to be run
-      if: ${{ inputs.debug_mode == 'true' }}      
+      if: ${{ inputs.use_petstore_example == 'true' }}      
       run: |
          docker pull swaggerapi/petstore
          docker run -d -e SWAGGER_URL=http://petstore:8080 -e SWAGGER_BASE_PATH=/v2 --name petstore swaggerapi/petstore
