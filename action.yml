@@ -1,0 +1,17 @@
+name: "WAS CICD Scan"
+description: "Reusable action for running the WAS Scanner in Github Actions"
+inputs:
+  access_key:
+    description: "API Access Key"
+    required: true
+  secret_key:
+    description: "API Access Key"
+    required: true
+  link_container:
+    description: "Use this if you would like to link it up to another container also running on Github Actions on the same runner"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: "Hello World test"
+      run: echo "Hello World"
