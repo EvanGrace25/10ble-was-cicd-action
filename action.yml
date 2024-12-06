@@ -10,11 +10,25 @@ inputs:
   link_container:
     description: "Use this if you would like to link it up to another container also running on Github Actions on the same runner"
     required: true
+  use_petstore_example:
+    description: "Would you like to just have this run the documented example?"
+    type: choice
+    required: false
+    default: 'false'
+    options:
+      - true
+      - false
 runs:
   using: "composite"
   steps:
     - name: "Hello World test"
       run: echo "Hello World"
+      shell: bash
+    - name: Check if the example needs to be run
+      if: ${{ inputs.debug_mode == 'true' }}      
+      run: |
+         docker pull swaggerapi/petstore
+         docker run -d -e SWAGGER_URL=http://petstore:8080 -e SWAGGER_BASE_PATH=/v2 --name petstore swaggerapi/petstore
       shell: bash
     - name: Run WAS Scanner
       run: |
