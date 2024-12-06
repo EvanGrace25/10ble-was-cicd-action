@@ -9,10 +9,20 @@ inputs:
     required: true
   link_container:
     description: "Use this if you would like to link it up to another container also running on Github Actions on the same runner"
-    required: false
+    required: true
 runs:
   using: "composite"
   steps:
     - name: "Hello World test"
       run: echo "Hello World"
+      shell: bash
+    - name: Run WAS Scanner
+      run: |
+        docker pull tenable/was-scanner:latest
+        docker run -v $(pwd):/scanner -t \
+          -e WAS_MODE=cicd \
+          -e ACCESS_KEY=${{ inputs.access_key }} \
+          -e SECRET_KEY=${{ inputs.secret_key }} \
+          --link ${{ inputs.link_container }} \
+          tenable/was-scanner:latest || true
       shell: bash
