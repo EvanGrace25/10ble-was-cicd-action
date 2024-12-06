@@ -54,4 +54,3 @@ runs:
       with:
         name: scan-vulnerability-output
         path: tenable_was_scan.html
-      shell: bash
